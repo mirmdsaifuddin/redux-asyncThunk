@@ -2,14 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const convertCurrency = createAsyncThunk(
   "transaction/convertCurrency",
-  async ({ payload, fromCurrency, type }) => {
+  async ({ payload: amount, fromCurrency, type }) => {
     // console.log(payload, fromCurrency, type);
     const res = await fetch(
-      `https://api.frankfurter.app/latest?amount=${payload}&from=${fromCurrency}&to=INR`
+      `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=INR`
     );
     const data = await res.json();
     const convertedCurrency = data.rates.INR;
-    // console.log(convertedCurrency, type);
+    //console.log(convertedCurrency, type);
     return { convertedCurrency, type };
   }
 );
